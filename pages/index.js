@@ -58,6 +58,16 @@ const List = ({ items, setSelected, selected }) => {
 }
 
 const QuestDetails = ({ selected, items, setItems }) => {
+  const renderItems = (item) => {
+    let elements = [];
+    for (let i = 0; i < (item.count ?? 1); i++) {
+      elements.push(
+        <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro' key={item.name + " " + i}><Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
+      );
+    }
+    return elements;
+  }
+
   const resetQuest = () => {
     const newItems = [...items];
     newItems[selected].quest = null;
@@ -73,30 +83,12 @@ const QuestDetails = ({ selected, items, setItems }) => {
       </div>
 
       <div className="flex flex-wrap gap-2 justify-center w-64" >
-        {items[selected].quest.items.map((items) => {
-          let elements = []
-          for (let i = 0; i < (items.count ?? 1); i++) {
-            elements.push(
-              <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro' key={items.name + " " + i}><Image src={"items/" + items.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
-            )
-          }
-          return elements
-        }
-        )}
+        {items[selected].quest.items.map((item) => renderItems(item))}
       </div>
 
       <fieldset className="flex gap-2 justify-center py-6 px-16 w-40 border-4 border-neutral-500 retro" >
         <legend className='px-4 leading-[0] mx-auto'>Rewards</legend>
-        {items[selected].quest.reward.map((items) => {
-          let elements = []
-          for (let i = 0; i < (items.count ?? 1); i++) {
-            elements.push(
-              <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro' key={items.name + " " + i}><Image src={"items/" + items.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
-            )
-          }
-          return elements
-        }
-        )}
+        {items[selected].quest.reward.map((item) => renderItems(item))}
       </fieldset>
 
     </div>
