@@ -76,7 +76,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
 
   return (
     <div className='flex flex-col gap-24 items-center h-full text-center'>
-      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro retro-inset-br hover:retro-inset-tl' onClick={resetQuest}>Go back</div>
+      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro' onClick={resetQuest}>Go back</div>
       <div>
         <h2 className='w-full text-4xl text-amber-500'>{items[selected].quest.name}</h2>
         <p>{items[selected].quest.description}</p>
