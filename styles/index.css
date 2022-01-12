@@ -14,8 +14,3 @@ body {
     font-size: 160%;
     color-scheme: dark;
 }
-
-.retro {
-    --border-width: 4px;
-    clip-path: polygon(0 var(--border-width), var(--border-width) var(--border-width), var(--border-width) -.5em, calc(100% - var(--border-width)) -.5em, calc(100% - var(--border-width)) var(--border-width), 100% var(--border-width), 100% calc(100% - var(--border-width)), calc(100% - var(--border-width)) calc(100% - var(--border-width)), calc(100% - var(--border-width)) 100%, var(--border-width) 100%, var(--border-width) calc(100% - var(--border-width)), 0 calc(100% - var(--border-width)));
-}

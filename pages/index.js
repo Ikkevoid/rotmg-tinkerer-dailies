@@ -26,7 +26,7 @@ export default function Home() {
 
       <List items={items} selected={selected} setSelected={setSelected} />
 
-      <main className="overflow-y-auto p-4 w-full max-w-screen-lg border-4 border-neutral-600 bg-neutral-700 retro">
+      <main className="overflow-y-auto p-4 w-full max-w-screen-lg border-4 border-neutral-600 bg-neutral-700 retro-clip-4">
         {!items[selected].quest ? <QuestsList selected={selected} items={items} setItems={setItems} /> : <QuestDetails selected={selected} items={items} setItems={setItems} />}
       </main>
 
@@ -45,7 +45,7 @@ const List = ({ items, setSelected, selected }) => {
     <ul className="flex overflow-y-auto flex-col gap-4 pr-2 w-full max-w-sm">
       {
         items.map((item, idx) => (
-          <li key={idx} className={`flex duration-100 text-center cursor-pointer retro bg-neutral-600 focus:bg-amber-500 focus:brightness-110 outline-none hover:brightness-110 ${selected == idx && "bg-amber-500"}`} onClick={handleClick} tabIndex="0" type={idx}>
+          <li key={idx} className={`flex duration-100 text-center cursor-pointer retro-clip-4 bg-neutral-600 focus:bg-amber-500 focus:brightness-110 outline-none hover:brightness-110 ${selected == idx && "bg-amber-500"}`} onClick={handleClick} tabIndex="0" type={idx}>
             <div className='flex justify-center items-center w-20 aspect-square'>
               <Image src={item.quest ? "/items/" + item.quest.items[0].name + ".png" : "/Exclamation Mark.png"} className='' alt="" width={40} height={40} unoptimized />
             </div>
@@ -62,7 +62,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
     let elements = [];
     for (let i = 0; i < (item.count ?? 1); i++) {
       elements.push(
-        <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro' key={item.name + " " + i}><Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
+        <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro-clip-4' key={item.name + " " + i}><Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
       );
     }
     return elements;
@@ -76,7 +76,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
 
   return (
     <div className='flex flex-col gap-24 items-center h-full text-center'>
-      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro' onClick={resetQuest}>Go back</div>
+      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro-clip-4' onClick={resetQuest}>Go back</div>
       <div>
         <h2 className='w-full text-4xl text-amber-500'>{items[selected].quest.name}</h2>
         <p>{items[selected].quest.description}</p>
@@ -86,7 +86,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
         {items[selected].quest.items.map((item) => renderItems(item))}
       </div>
 
-      <fieldset className="flex gap-2 justify-center py-6 px-16 w-40 border-4 border-neutral-500 retro" >
+      <fieldset className="flex gap-2 justify-center py-6 px-16 w-40 border-4 border-neutral-500 retro-clip-4" >
         <legend className='px-4 leading-[0] mx-auto'>Rewards</legend>
         {items[selected].quest.reward.map((item) => renderItems(item))}
       </fieldset>
@@ -110,7 +110,7 @@ const QuestsList = ({ selected, items, setItems }) => {
   return (
     <div className='flex flex-wrap gap-4 justify-center'>
       {result.quests.map((quest, idx) =>
-        <div key={idx} value={idx} onClick={handleUpdate} className="flex flex-col justify-center items-center p-2 w-52 border-4 duration-100 cursor-pointer border-neutral-800 hover:bg-neutral-800/80 retro bg-neutral-800/40" >
+        <div key={idx} value={idx} onClick={handleUpdate} className="flex flex-col justify-center items-center p-2 w-52 border-4 duration-100 cursor-pointer border-neutral-800 hover:bg-neutral-800/80 retro-clip-4 bg-neutral-800/40" >
           <h2 className='leading-none text-center'>{quest.name}</h2>
           <div className='flex flex-wrap justify-center items-center'>
             {quest.items.map((items) => {
