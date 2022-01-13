@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import Image from 'next/image'
 import { useState } from 'react'
-import { data } from "../components/questsData";
+import { data } from "../misc/questsData";
 
 export default function Home() {
   const [selected, setSelected] = useState(0)
@@ -15,34 +15,52 @@ export default function Home() {
     { name: "Epic Quests", quest: null },
     { name: "Craft Quests", quest: null },
   ]);
+  const [sidebarVisible, setSidebarVisible] = useState(false)
+
+  function toggleSidebar() {
+    setSidebarVisible(!sidebarVisible)
+  }
 
   return (
-    <div className="flex gap-4 justify-center p-4 w-screen h-screen text-white bg-gradient-to-b from-black to-zinc-800">
+    <div className="flex flex-col gap-4 items-center p-4 h-screen text-white bg-gradient-to-b from-black to-zinc-800">
       <Head>
         <title>RotMG Tinkerer dailies tracker</title>
         <meta name="description" content="Track tinkerer daily quests" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <List items={items} selected={selected} setSelected={setSelected} />
+      <nav className='flex gap-2 justify-between items-center p-2 w-full max-w-screen-xl border-4 retro-clip-4 bg-neutral-700 border-neutral-600'>
+        <div className='flex cursor-pointer sm:hidden' onClick={toggleSidebar}>
+          <Image src="Menu Icon.png" className='' alt="" width={40} height={40} unoptimized />
+        </div>
+        <h2>RotMG Tinkerer Quests</h2>
+      </nav>
 
-      <main className="overflow-y-auto p-4 w-full max-w-screen-lg border-4 border-neutral-600 bg-neutral-700 retro-clip-4">
-        {!items[selected].quest ? <QuestSelect selected={selected} items={items} setItems={setItems} /> : <QuestDetails selected={selected} items={items} setItems={setItems} />}
-      </main>
+      <div className='flex overflow-y-hidden gap-2 w-full max-w-screen-xl h-full'>
+        <List items={items} selected={selected} setSelected={setSelected} sidebarVisible={sidebarVisible} toggleSidebar={toggleSidebar} />
+
+
+        <main className={`overflow-y-scroll p-4 w-full border-4 border-neutral-600 bg-neutral-700 retro-clip-4 ${sidebarVisible ? "hidden" : ""}`}>
+          {!items[selected].quest ?
+            <QuestSelect selected={selected} items={items} setItems={setItems} /> :
+            <QuestDetails selected={selected} items={items} setItems={setItems} />}
+        </main>
+      </div>
 
     </div>
   )
 }
 
 // Sidebar containing list of quests
-const List = ({ items, setSelected, selected }) => {
+const List = ({ items, setSelected, selected, sidebarVisible, toggleSidebar }) => {
   function handleClick(e) {
     e.preventDefault();
     setSelected(e.currentTarget.getAttribute('type'))
+    toggleSidebar()
   }
 
   return (
-    <ul className="flex overflow-y-auto flex-col gap-4 pr-2 w-full max-w-sm">
+    <ul className={`flex-col gap-4 w-full max-w-sm sm:flex overflow-y-scroll ${sidebarVisible ? "flex" : "hidden"}`}>
       {
         items.map((item, idx) => (
           <li key={idx} className={`flex duration-100 text-center cursor-pointer retro-clip-4 bg-neutral-600 focus:bg-amber-500 focus:brightness-110 outline-none hover:brightness-110 ${selected == idx && "bg-amber-500"}`} onClick={handleClick} tabIndex="0" type={idx}>
@@ -62,7 +80,9 @@ const QuestDetails = ({ selected, items, setItems }) => {
     let elements = [];
     for (let i = 0; i < (item.count ?? 1); i++) {
       elements.push(
-        <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro-clip-4' key={item.name + " " + i}><Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized /></div>
+        <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro-clip-4' key={item.name + " " + i}>
+          <Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized />
+        </div>
       );
     }
     return elements;
@@ -75,8 +95,8 @@ const QuestDetails = ({ selected, items, setItems }) => {
   }
 
   return (
-    <div className='flex flex-col gap-24 items-center h-full text-center'>
-      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro-clip-4' onClick={resetQuest}>Go back</div>
+    <div className='flex flex-col gap-24 items-center text-center'>
+      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro-clip-4' onClick={resetQuest}>Change quest</div>
       <div>
         <h2 className='w-full text-4xl text-amber-500'>{items[selected].quest.name}</h2>
         <p>{items[selected].quest.description}</p>
