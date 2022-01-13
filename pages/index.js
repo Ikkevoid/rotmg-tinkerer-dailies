@@ -31,7 +31,7 @@ export default function Home() {
 
       <nav className='flex gap-2 justify-between items-center p-2 w-full max-w-screen-xl border-4 retro-clip-4 bg-neutral-700 border-neutral-600'>
         <div className='flex cursor-pointer sm:hidden' onClick={toggleSidebar}>
-          <Image src="Menu Icon.png" className='' alt="" width={40} height={40} unoptimized />
+          <Image src="Menu Icon.png" className='[image-rendering:pixelated]' alt="" width={40} height={40} unoptimized />
         </div>
         <h2>RotMG Tinkerer Quests</h2>
       </nav>
@@ -65,7 +65,7 @@ const List = ({ items, setSelected, selected, sidebarVisible, toggleSidebar }) =
         items.map((item, idx) => (
           <li key={idx} className={`flex duration-100 text-center cursor-pointer retro-clip-4 bg-neutral-600 focus:bg-amber-500 focus:brightness-110 outline-none hover:brightness-110 ${selected == idx && "bg-amber-500"}`} onClick={handleClick} tabIndex="0" type={idx}>
             <div className='flex justify-center items-center w-20 aspect-square'>
-              <Image src={item.quest ? "/items/" + item.quest.items[0].name + ".png" : "/Exclamation Mark.png"} className='' alt="" width={40} height={40} unoptimized />
+              <Image src={item.quest ? "/items/" + item.quest.items[0].name + ".png" : "/Exclamation Mark.png"} className='[image-rendering:pixelated]' alt="" width={40} height={40} unoptimized />
             </div>
             <h2 className='flex flex-grow justify-center items-center my-1 mr-1 bg-black/20'>{item.quest ? item.quest.name : item.name}</h2>
           </li>
@@ -81,7 +81,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
     for (let i = 0; i < (item.count ?? 1); i++) {
       elements.push(
         <div className='h-12 border-4 border-neutral-400 bg-neutral-500 aspect-square retro-clip-4' key={item.name + " " + i}>
-          <Image src={"items/" + item.name + ".png"} alt="" width={40} height={40} unoptimized />
+          <Image src={"items/" + item.name + ".png"} className='[image-rendering:pixelated]' alt="" width={40} height={40} unoptimized />
         </div>
       );
     }
@@ -136,7 +136,7 @@ const QuestSelect = ({ selected, items, setItems }) => {
             {quest.items.map((items) => {
               let elements = []
               for (let i = 0; i < (items.count ?? 1); i++) {
-                elements.push(<Image src={"items/" + items.name + ".png"} alt="" width={40} height={40} key={items.name + " " + i} unoptimized />)
+                elements.push(<Image src={"items/" + items.name + ".png"} className='[image-rendering:pixelated]' alt="" width={40} height={40} key={items.name + " " + i} unoptimized />)
               }
               return elements
             })}
