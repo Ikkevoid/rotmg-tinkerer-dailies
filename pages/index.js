@@ -40,7 +40,7 @@ export default function Home() {
         <List items={items} selected={selected} setSelected={setSelected} sidebarVisible={sidebarVisible} toggleSidebar={toggleSidebar} />
 
 
-        <main className={`overflow-y-scroll p-4 w-full border-4 border-neutral-600 bg-neutral-700 retro-clip-4 ${sidebarVisible ? "hidden" : ""}`}>
+        <main className={`overflow-y-scroll p-4 w-full border-4 border-neutral-600 sm:block bg-neutral-700 retro-clip-4 ${sidebarVisible ? "hidden" : ""}`}>
           {!items[selected].quest ?
             <QuestSelect selected={selected} items={items} setItems={setItems} /> :
             <QuestDetails selected={selected} items={items} setItems={setItems} />}
