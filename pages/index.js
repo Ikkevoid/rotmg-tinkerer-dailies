@@ -60,7 +60,7 @@ const List = ({ items, setSelected, selected, sidebarVisible, toggleSidebar }) =
   }
 
   return (
-    <ul className={`flex-col gap-4 w-full max-w-sm sm:flex overflow-y-auto ${sidebarVisible ? "flex" : "hidden"}`}>
+    <ul className={`flex-col gap-4 w-full sm:max-w-sm sm:flex overflow-y-auto ${sidebarVisible ? "flex" : "hidden"}`}>
       {
         items.map((item, idx) => (
           <li key={idx} className={`flex duration-100 text-center cursor-pointer retro-clip-4 bg-neutral-600 focus:bg-amber-500 focus:brightness-110 outline-none hover:brightness-110 ${selected == idx && "bg-amber-500"}`} onClick={handleClick} tabIndex="0" type={idx}>
