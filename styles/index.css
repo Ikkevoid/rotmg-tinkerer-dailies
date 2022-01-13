@@ -13,4 +13,13 @@
 body {
     font-size: 160%;
     color-scheme: dark;
+    height: 100vh;
+}
+
+html, body {
+    height: -webkit-fill-available;
+}
+
+#__next {
+    height: 100%;
 }

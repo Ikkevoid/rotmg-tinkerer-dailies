@@ -22,7 +22,7 @@ export default function Home() {
   }
 
   return (
-    <div className="flex flex-col gap-4 items-center p-4 h-screen text-white bg-gradient-to-b from-black to-zinc-800">
+    <div className="flex flex-col gap-4 items-center p-4 h-full text-white bg-gradient-to-b from-black to-zinc-800">
       <Head>
         <title>RotMG Tinkerer dailies tracker</title>
         <meta name="description" content="Track tinkerer daily quests" />
@@ -33,7 +33,7 @@ export default function Home() {
         <div className='flex cursor-pointer sm:hidden' onClick={toggleSidebar}>
           <Image src="Menu Icon.png" className='[image-rendering:pixelated]' alt="" width={40} height={40} unoptimized />
         </div>
-        <h2>RotMG Tinkerer Quests</h2>
+        <h1>RotMG Tinkerer Quests</h1>
       </nav>
 
       <div className='flex overflow-y-hidden gap-2 w-full max-w-screen-xl h-full'>
@@ -95,21 +95,23 @@ const QuestDetails = ({ selected, items, setItems }) => {
   }
 
   return (
-    <div className='flex flex-col gap-24 items-center text-center'>
-      <div className='flex flex-row self-start px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro-clip-4' onClick={resetQuest}>Change quest</div>
-      <div>
-        <h2 className='w-full text-4xl text-amber-500'>{items[selected].quest.name}</h2>
-        <p>{items[selected].quest.description}</p>
-      </div>
+    <div className='flex flex-col gap-4 justify-around h-full'>
+      <div className='flex flex-col gap-8 justify-center items-center h-full text-center sm:gap-32'>
+        <div>
+          <h2 className='w-full text-4xl text-amber-500'>{items[selected].quest.name}</h2>
+          <p>{items[selected].quest.description}</p>
+        </div>
 
-      <div className="flex flex-wrap gap-2 justify-center w-64" >
-        {items[selected].quest.items.map((item) => renderItems(item))}
-      </div>
+        <div className="flex flex-wrap gap-2 justify-center w-64" >
+          {items[selected].quest.items.map((item) => renderItems(item))}
+        </div>
 
-      <fieldset className="flex gap-2 justify-center py-6 px-16 w-40 border-4 border-neutral-500 retro-clip-4" >
-        <legend className='px-4 leading-[0] mx-auto'>Rewards</legend>
-        {items[selected].quest.reward.map((item) => renderItems(item))}
-      </fieldset>
+        <fieldset className="flex gap-2 justify-center py-6 px-16 w-40 border-4 border-neutral-500 retro-clip-4" >
+          <legend className='px-4 leading-[0] mx-auto'>Rewards</legend>
+          {items[selected].quest.reward.map((item) => renderItems(item))}
+        </fieldset>
+      </div>
+      <div className='flex flex-row self-end px-2 border-4 cursor-pointer shadow-black/20 border-neutral-500 text-neutral-300 bg-neutral-600 hover:brightness-110 retro-clip-4' onClick={resetQuest}>Change quest</div>
 
     </div>
   )
