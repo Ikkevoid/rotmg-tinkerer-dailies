@@ -27,7 +27,7 @@ export default function Home() {
       <List items={items} selected={selected} setSelected={setSelected} />
 
       <main className="overflow-y-auto p-4 w-full max-w-screen-lg border-4 border-neutral-600 bg-neutral-700 retro-clip-4">
-        {!items[selected].quest ? <QuestsList selected={selected} items={items} setItems={setItems} /> : <QuestDetails selected={selected} items={items} setItems={setItems} />}
+        {!items[selected].quest ? <QuestSelect selected={selected} items={items} setItems={setItems} /> : <QuestDetails selected={selected} items={items} setItems={setItems} />}
       </main>
 
     </div>
@@ -95,7 +95,7 @@ const QuestDetails = ({ selected, items, setItems }) => {
   )
 }
 
-const QuestsList = ({ selected, items, setItems }) => {
+const QuestSelect = ({ selected, items, setItems }) => {
   const result = data.find(obj => {
     return obj.name === items[selected].name
   })
